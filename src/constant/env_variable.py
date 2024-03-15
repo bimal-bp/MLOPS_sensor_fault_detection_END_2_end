@@ -1,0 +1,1 @@
+MONGODB_URL_KEY="mongodb+srv://mongodb:<password>@cluster0.jdgiqmy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"

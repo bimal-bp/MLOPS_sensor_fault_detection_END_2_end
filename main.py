@@ -1,15 +1,6 @@
-import os 
-import sys 
-from src.utils.exception import customexception
-from src.utils.logger import logging
-from src.pipeline.training_pipeline import TrainPipeline
+from src.configuration.mongodb_connect import MongoDBClient
 
-def start_training():
-    try:
-        train_pipeline=TrainPipeline()
-        train_pipeline.run_pipeline()
 
-    except Exception as e:
-        raise customexception(e,sys)
-if __name__ == "__main__":
-    start_training()
+if __name__ == '__main__':
+    mongodb_client = MongoDBClient()
+    print("collection name:",mongodb_client.database.list_collection_names())

@@ -21,13 +21,12 @@ def write_yaml_file(file_path:str,content:object,replace:bool=False) -> None:
         raise customexception(e,sys)
 
 
-def read_yaml_file(file_path:str) -> dict:
+def read_yaml_file(file_path: str) -> dict:
     try:
-        with open(file_path,"rb") as yaml_file:
+        with open(file_path, "rb") as yaml_file:
             return yaml.safe_load(yaml_file)
     except Exception as e:
-        raise customexception(e,sys)
-
+        raise customexception(e, sys) from e
 
 def save_object(file_path:str,obj:object) -> None:
     try:
