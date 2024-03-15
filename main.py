@@ -13,3 +13,23 @@ def set_env_variable(env_file_path):
     if os.getenv('MONGO_DB_URL',None) is None:
         env_config = read_yaml_file(env_file_path)
         os.environ['MONGO_DB_URL']=env_config['MONGO_DB_URL']
+
+
+import sys
+
+from src.utils.exception import customexception
+from src.pipeline.training_pipeline import TrainPipeline
+
+
+def start_training():
+    try:
+        train_pipeline = TrainPipeline()
+
+        train_pipeline.run_pipeline()
+
+    except Exception as e:
+        raise customexception(e, sys)
+
+
+if __name__ == "__main__":
+    start_training()
