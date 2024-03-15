@@ -9,3 +9,14 @@
 - utils common.py added 
 - create cluster in mongo atlas 
 - Data access & get data 
+
+- **********************************************************************8
+- # modular coding part 
+- upadte schme yaml
+- upadte constaants
+- config entuty 
+- artifacts entity 
+- data ingetsion >>>>>>>>>>>>>>>>....................
+- train pipeline 
+- main.py
+- *********************************************************************************8
