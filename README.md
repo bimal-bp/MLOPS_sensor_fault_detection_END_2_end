@@ -6,4 +6,6 @@
 - Try 6 missing value experiemnts
 - XGBoost with simple imputer Give best model
 - Logger , Exception 
--  Utils Commpny 
+- utils common.py added 
+- create cluster in mongo atlas 
+- Data access & get data 
