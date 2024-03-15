@@ -1,4 +1,5 @@
 import sys 
+import os 
 from typing import Optional 
 import numpy as np 
 import pandas as pd 
@@ -16,7 +17,7 @@ class SensorData:
         except Exception as e:
             raise customexception(e,sys)
 
-    def save_csv(self,file_path,collection_name:str,database_name:Optional[str] = None):
+    def save_csv_file(self,file_path,collection_name:str,database_name:Optional[str] = None):
         try:
             data_frame=pd.read_csv(file_path)
             data_frame.reset_index(drop=True,inplace=True)
@@ -32,7 +33,7 @@ class SensorData:
 
 
     def export_collection_as_dataframe(
-        self.collection_name:str,database_name:Optional[str]=None) -> pd.DataFrame:
+        self,collection_name:str,database_name:Optional[str]=None) -> pd.DataFrame:
         try:
             "export entire dataframe return collections "
             if database_name is None:
