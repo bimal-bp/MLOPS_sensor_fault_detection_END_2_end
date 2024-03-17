@@ -149,7 +149,7 @@ columns:
   - dz_000: int
   - ea_000: int
   - eb_000: int
-  - ec_00: int
+  - ec_000: int
   - ed_000: int
   - ee_000: int
   - ee_001: int
@@ -337,3 +337,5 @@ drop_columns:
   - cr_000
   - bo_000
   - bn_000
+  - _id
+  - aa_000
