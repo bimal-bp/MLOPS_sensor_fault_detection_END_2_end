@@ -1,6 +1,6 @@
 from src.entity.config_entity import TrainingPipelineConfig,DataIngestionConfig,DataValidationConfig
-from src.entity.config_entity import DataTransformationConfig,ModelTrainerConfig,ModelEvaluationConfig
-from src.entity.artifact_entity import DataIngestionArtifact,DataValidationArtifact,DataTransformationArtifact,ModelTrainerArtifact,ModelEvaluationArtifact
+from src.entity.config_entity import DataTransformationConfig,ModelTrainerConfig,ModelEvaluationConfig,ModelPusherConfig
+from src.entity.artifact_entity import DataIngestionArtifact,DataValidationArtifact,DataTransformationArtifact,ModelTrainerArtifact,ModelEvaluationArtifact,ModelPusherArtifact
 import os ,sys 
 from src.utils.logger import logging
 from src.utils.exception import customexception 
@@ -62,6 +62,17 @@ class TrainPipeline:
             model_eval_artifact = model_eval.initiate_model_evaluation()
         except Exception as e:
             raise customexception(e,sys)
+
+    def start_model_pusher(self,model_eval_artifact:ModelEvaluationArtifact):
+        try:
+            model_pusher_config= ModelPusherConfig(training_pipeline_config=self.training_pipeline_config)
+            model_pusher = ModelPusher(model_pusher_config,model_eval_artifact)
+            model_pusher_artifact = model_pusher.initiate_model_pusher()
+            return model_pusher_artifact
+        except Exception as e:
+            raise customexception(e,sys)
+
+
     def run_pipeline(self):
         try:
             TrainPipeline.is_pipeline_running=True
@@ -70,5 +81,8 @@ class TrainPipeline:
             data_transformation_artifact=self.start_data_transformation(data_validation_artifact=data_validation_artifact)
             model_trainer_artifact=self.start_model_trainer(data_transformation_artifact)
             model_eval_artifact = self.start_model_evaluation(data_validation_artifact,model_trainer_artifact)
+            if not model_eval_artifact.is_model_accepted:
+                raise Exception(f"model is not better ")
+            model_pusher_artifact = self.start_model_pusher(model_eval_artifact)
         except Exception as e :
             raise customexception(e,sys)
