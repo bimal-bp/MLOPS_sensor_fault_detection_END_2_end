@@ -1,4 +1,4 @@
-name : Docker Image CICD 
+name: Docker Image CICD
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
     paths-ignore:
       - 'README.md'
-  
+
 permissions:
   id-token: write
   contents: read
@@ -26,11 +26,9 @@ jobs:
       - name: Run unit test
         run: echo "Running unit test"
 
-  Docker Image:
-  
+  Docker_Image: # Corrected indentation
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
