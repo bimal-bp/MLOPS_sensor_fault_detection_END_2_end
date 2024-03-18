@@ -58,3 +58,9 @@ class ModelTrainerConfig:
         self.overfitting_underfitting_threshold = training_pipilien.MODEL_TRAINER_OVER_FITTING_UNDER_FITTING_THRESHOLD
 
 
+class ModelEvaluationConfig:
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        self.model_evaluation_dir: os.path.join(training_pipeline_config.artifact_dir,training_pipilien.MODEL_EVALUATION_DIR_NAME)
+        self.report_file_path = os.path.join(self.model_evaluation_dir,training_pipilien.MODEL_EVALUATION_REPORT_NAME)
+        self.change_threshold = training_pipilien.MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE
+
