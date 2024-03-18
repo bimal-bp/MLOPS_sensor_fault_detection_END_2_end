@@ -1,9 +1,10 @@
-name : workflow
+name : Docker Image CICD 
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
     paths-ignore:
       - 'README.md'
   
@@ -24,3 +25,12 @@ jobs:
 
       - name: Run unit test
         run: echo "Running unit test"
+
+  Docker Image:
+  
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
